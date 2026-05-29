@@ -6,4 +6,4 @@ The app includes a simple launcher screen for granting permissions and testing s
 
 The source repository includes code, license, releases, and issue tracking.
 
-Tasker or another Locale-compatible host is required for automation integration. The app does not request Internet access and does not send scan results off the device.
+Tasker or another Locale-compatible host is required for automation integration. The app has no ads, analytics, trackers, in-app purchases, or paid features. It does not request Internet access and does not send scan results off the device.

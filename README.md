@@ -6,6 +6,10 @@
 
 Native Android plug-in for Tasker that performs a short Bluetooth LE scan for iBeacon advertisements and returns matching beacon details as Tasker local variables.
 
+No ads, analytics, trackers, in-app purchases, or Internet permission. Bluetooth
+scan results stay on the device unless returned locally to Tasker or another
+Locale-compatible host.
+
 The initial implementation of this app was written with OpenAI Codex.
 
 ## Tasker Usage
@@ -25,7 +29,7 @@ matching iBeacon is found.
 
 Android treats Bluetooth LE scan results as location-capable. For Tasker scans
 that run after the app is hidden, open the app's location settings and choose
-`Allow all the time`. The app does not request Internet access.
+`Allow all the time`.
 
 Tasker scans run on demand, including after reboot when Android allows Tasker
 and the plug-in to receive the automation event. When the optional compatibility
@@ -132,7 +136,8 @@ git ls-remote --tags origin v0.1.0
 ```
 
 The app uses package id `io.github.smailzhu.ibeacontasker`, license
-`Apache-2.0`, and default source version `0.1.0` with `versionCode` `1`.
+`Apache-2.0`, no Internet permission, and default source version `0.1.0` with
+`versionCode` `1`.
 
 Publishing steps are documented in
 [`docs/fdroid-publishing.md`](docs/fdroid-publishing.md).
