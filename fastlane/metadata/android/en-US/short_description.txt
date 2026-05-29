@@ -1,0 +1,1 @@
+Scan iBeacon advertisements from Tasker tasks

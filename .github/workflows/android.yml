@@ -1,0 +1,72 @@
+name: Android
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      HAS_PRIVATE_SIGNING_KEY: ${{ secrets.ANDROID_KEYSTORE_BASE64 != '' && secrets.ANDROID_KEYSTORE_PASSWORD != '' && secrets.ANDROID_KEY_ALIAS != '' && secrets.ANDROID_KEY_PASSWORD != '' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5.2.0
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6.1.0
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v4.0.1
+
+      - name: Install Android SDK packages
+        run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
+
+      - name: Use private signing key when configured
+        if: env.HAS_PRIVATE_SIGNING_KEY == 'true'
+        env:
+          SIGNING_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          SIGNING_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          SIGNING_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/signing"
+          echo "$SIGNING_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/signing/release.jks"
+          {
+            echo "ANDROID_KEYSTORE_FILE=$RUNNER_TEMP/signing/release.jks"
+            echo "ANDROID_KEYSTORE_PASSWORD=$SIGNING_KEYSTORE_PASSWORD"
+            echo "ANDROID_KEY_ALIAS=$SIGNING_KEY_ALIAS"
+            echo "ANDROID_KEY_PASSWORD=$SIGNING_KEY_PASSWORD"
+          } >> "$GITHUB_ENV"
+
+      - name: Require signing key for tag release builds
+        if: startsWith(github.ref, 'refs/tags/v') && env.HAS_PRIVATE_SIGNING_KEY != 'true'
+        run: |
+          echo "Tag release builds require Android signing secrets." >&2
+          exit 1
+
+      - name: Build
+        run: >
+          ./gradlew --no-daemon
+          -PciSigning="$HAS_PRIVATE_SIGNING_KEY"
+          lintDebug assembleDebug assembleRelease
+
+      - name: Upload release APK
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: ibeacon-tasker-plugin-release-apk
+          path: app/build/outputs/apk/release/*.apk
+          if-no-files-found: error

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">iBeacon Tasker</string>
+    <string name="plugin_label">Scan iBeacon</string>
+    <string name="notification_channel_scans">iBeacon scans</string>
+</resources>

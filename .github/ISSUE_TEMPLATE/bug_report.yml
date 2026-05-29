@@ -1,0 +1,104 @@
+name: Bug report
+description: Report a problem with scanning, Tasker integration, permissions, or installation.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a problem. Please include enough detail to reproduce it.
+
+  - type: input
+    id: app-version
+    attributes:
+      label: App version
+      description: Version name and build number, if available.
+      placeholder: "0.1.0 build 1"
+    validations:
+      required: true
+
+  - type: input
+    id: android-version
+    attributes:
+      label: Android version
+      placeholder: "Android 15"
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: Device model
+      placeholder: "Pixel 10a"
+    validations:
+      required: true
+
+  - type: input
+    id: tasker-version
+    attributes:
+      label: Tasker or Locale-compatible host version
+      placeholder: "Tasker 6.x, or not using Tasker"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Problem area
+      options:
+        - Launcher scan
+        - Tasker plug-in scan
+        - Background scan
+        - Permissions
+        - Installation or update
+        - F-Droid or release metadata
+        - Other
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: permissions
+    attributes:
+      label: Permission state
+      options:
+        - label: Bluetooth scan/connect permissions are granted.
+        - label: Foreground location permission is granted.
+        - label: Background location is set to allow all the time.
+        - label: Notification permission is granted when using the compatibility monitor.
+        - label: Battery usage is unrestricted for this app.
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include whether the app was open, hidden, removed from recents, after reboot, or screen off.
+      placeholder: |
+        1. Configure a Tasker action with ...
+        2. Hide the app and wait ...
+        3. Trigger the task ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Remove private beacon addresses, UUIDs, and any unrelated personal data before attaching logs or screenshots.
+      render: text
+    validations:
+      required: false

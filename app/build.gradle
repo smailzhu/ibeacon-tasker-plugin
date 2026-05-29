@@ -1,0 +1,64 @@
+plugins {
+    id "com.android.application"
+}
+
+def appVersionCode = (findProperty("appVersionCode") ?: "1") as Integer
+def appVersionName = findProperty("appVersionName") ?: "0.1.0"
+def ciSigning = (findProperty("ciSigning") ?: "false").toString().toBoolean()
+def envStoreFile = System.getenv("ANDROID_KEYSTORE_FILE")
+def envStorePassword = System.getenv("ANDROID_KEYSTORE_PASSWORD")
+def envKeyAlias = System.getenv("ANDROID_KEY_ALIAS")
+def envKeyPassword = System.getenv("ANDROID_KEY_PASSWORD")
+def hasSigningKey = [envStoreFile, envStorePassword, envKeyAlias, envKeyPassword].every {
+    it != null && it.trim().length() > 0
+}
+
+android {
+    namespace "io.github.smailzhu.ibeacontasker"
+    compileSdk 36
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    defaultConfig {
+        applicationId "io.github.smailzhu.ibeacontasker"
+        minSdk 23
+        targetSdk 36
+        versionCode appVersionCode
+        versionName appVersionName
+    }
+
+    signingConfigs {
+        updateKey {
+            if (hasSigningKey) {
+                storeFile file(envStoreFile)
+                storePassword envStorePassword
+                keyAlias envKeyAlias
+                keyPassword envKeyPassword
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            if (ciSigning && hasSigningKey) {
+                signingConfig signingConfigs.updateKey
+            }
+            versionNameSuffix "-debug"
+        }
+        release {
+            if (ciSigning && hasSigningKey) {
+                signingConfig signingConfigs.updateKey
+            }
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}

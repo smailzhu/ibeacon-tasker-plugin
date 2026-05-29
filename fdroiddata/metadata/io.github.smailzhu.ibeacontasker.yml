@@ -1,0 +1,31 @@
+# Copy this file to fdroiddata/metadata/io.github.smailzhu.ibeacontasker.yml
+# when opening the F-Droid merge request.
+AntiFeatures:
+  NonFreeDep:
+    en-US: Tasker integration requires Tasker or another compatible Locale plug-in host; the built-in scanner can run without Tasker.
+
+Categories:
+  - Connectivity
+  - System
+
+License: Apache-2.0
+AuthorName: smailzhu
+
+SourceCode: https://github.com/smailzhu/ibeacon-tasker-plugin
+IssueTracker: https://github.com/smailzhu/ibeacon-tasker-plugin/issues
+Changelog: https://github.com/smailzhu/ibeacon-tasker-plugin/releases
+
+RepoType: git
+Repo: https://github.com/smailzhu/ibeacon-tasker-plugin.git
+
+Builds:
+  - versionName: 0.1.0
+    versionCode: 1
+    commit: v0.1.0
+    gradle:
+      - yes
+
+AutoUpdateMode: Version v%v
+UpdateCheckMode: Tags
+CurrentVersion: 0.1.0
+CurrentVersionCode: 1

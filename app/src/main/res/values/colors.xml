@@ -1,0 +1,5 @@
+<resources>
+    <color name="window_background">#FFFFFF</color>
+    <color name="system_bar">#FFFFFF</color>
+    <color name="launcher_background">#0B5D57</color>
+</resources>
