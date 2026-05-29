@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/readme-icon.png" alt="iBeacon Tasker Plugin icon" width="96">
+</p>
+
 # iBeacon Tasker Plugin
 
 [![Android build](https://github.com/smailzhu/ibeacon-tasker-plugin/actions/workflows/android.yml/badge.svg?branch=main)](https://github.com/smailzhu/ibeacon-tasker-plugin/actions/workflows/android.yml)
