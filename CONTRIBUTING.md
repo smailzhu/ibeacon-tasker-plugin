@@ -28,10 +28,11 @@ Build locally with:
 
 - Do not commit signing keys, keystores, passwords, or release secrets.
 - GitHub release APKs are signed by repository secrets.
-- F-Droid metadata is configured for reproducible builds using the GitHub
-  release APK and the current release signing certificate.
+- The initial F-Droid submission is source-built and F-Droid-signed. Future
+  release APKs omit AGP dependency metadata so reproducible builds can be
+  enabled in a later F-Droid update.
 - Do not rotate the release signing key or rename the `app-release.apk` release
-  asset without updating the F-Droid metadata first.
+  asset without checking the F-Droid metadata first.
 
 ## Versions And Releases
 

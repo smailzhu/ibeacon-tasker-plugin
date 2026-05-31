@@ -21,6 +21,11 @@ android {
         buildConfig true
     }
 
+    dependenciesInfo {
+        includeInApk false
+        includeInBundle false
+    }
+
     defaultConfig {
         applicationId "io.github.smailzhu.ibeacontasker"
         minSdk 23

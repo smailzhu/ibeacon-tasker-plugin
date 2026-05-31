@@ -71,9 +71,9 @@ Returned variables:
   this app is not restricted.
 - Tasker may return from a scan before the configured duration. The duration is
   a maximum wait time, not a fixed delay.
-- The F-Droid submission is configured for reproducible builds so accepted
-  F-Droid APKs should use the same signing key as GitHub releases. If you use a
-  build signed by a different key, uninstall once before switching sources.
+- The initial F-Droid submission is source-built and signed by F-Droid. If you
+  switch between the GitHub release APK and the F-Droid APK, uninstall once
+  because the signing keys differ.
 - If you installed a pre-public APK, uninstall it once before installing current
   public builds because the package name or signing key may have changed.
 
@@ -111,10 +111,11 @@ To install an update from a downloaded release APK:
 adb install -r app-release.apk
 ```
 
-The F-Droid submission is configured for reproducible builds so accepted F-Droid
-APKs should use the same signing key as GitHub releases. Android cannot update
-between APKs signed by different keys, so uninstall once if you use an APK from
-another signing source.
+The initial F-Droid `v0.1.0` submission is source-built and signed by F-Droid.
+Android cannot update between APKs signed by different keys, so uninstall once
+when switching between the GitHub release APK and the F-Droid APK. Future GitHub
+release APKs omit AGP dependency metadata from the APK signing block so
+reproducible builds can be enabled in a later F-Droid update.
 
 Do not change `applicationId` after creating Tasker profiles. Tasker identifies plug-ins partly by package and edit activity class.
 
@@ -144,9 +145,12 @@ The app uses package id `io.github.smailzhu.ibeacontasker`, license
 `Apache-2.0`, no Internet permission, and default source version `0.1.0` with
 `versionCode` `1`.
 
-The F-Droid metadata enables reproducible builds by verifying the GitHub release
-APK against F-Droid's source build and pinning the release signing certificate.
-Its build recipe also pins JDK 17 to match the published GitHub release APK.
+The initial F-Droid metadata builds `v0.1.0` from source and lets F-Droid sign
+the APK. The existing GitHub `v0.1.0` release APK is byte-for-byte reproducible
+after signature copying, but F-Droid rejects it because AGP included dependency
+metadata in the APK signing block. Future GitHub release APKs are configured to
+omit that metadata so reproducible builds can be enabled in a later F-Droid
+update.
 
 Publishing steps are documented in
 [`docs/fdroid-publishing.md`](docs/fdroid-publishing.md).
