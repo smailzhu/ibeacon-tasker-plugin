@@ -38,11 +38,9 @@ Binaries: https://github.com/smailzhu/ibeacon-tasker-plugin/releases/download/v%
 AllowedAPKSigningKeys: dfe6afb981260242785c1db452ce5e9bab5d1408de8987fa9c39cc78ef5d9faf
 ```
 
-GitHub release builds use JDK 17. The fdroiddata recipe installs and selects
-OpenJDK 17 from Debian bookworm, and writes `org.gradle.java.home` during the
-build, so F-Droid's reproducible-build comparison uses the same Java toolchain
-as the published GitHub release. Keep GitHub release builds on JDK 17 unless you
-are making a new release and validating reproducibility again.
+GitHub release builds use JDK 21, matching the default F-Droid CI build
+environment. Keep GitHub release builds on JDK 21 unless you are making a new
+release and validating reproducibility again.
 
 ## Metadata Merge Request Path
 

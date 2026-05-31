@@ -5,7 +5,7 @@ and easy to review.
 
 ## Development Setup
 
-- Use JDK 17.
+- Use JDK 21.
 - Install Android SDK platform 36.
 - Keep `applicationId` as `io.github.smailzhu.ibeacontasker`.
 

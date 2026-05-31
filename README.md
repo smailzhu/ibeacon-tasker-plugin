@@ -124,7 +124,7 @@ Do not change `applicationId` after creating Tasker profiles. Tasker identifies 
 ./gradlew assembleDebug
 ```
 
-The local machine needs Android SDK 36 and JDK 17.
+The local machine needs Android SDK 36 and JDK 21.
 
 ## F-Droid
 
@@ -146,7 +146,7 @@ The app uses package id `io.github.smailzhu.ibeacontasker`, license
 
 The F-Droid metadata enables reproducible builds by verifying the GitHub release
 APK against F-Droid's source build and pinning the release signing certificate.
-The build recipe pins JDK 17 to match GitHub Actions release builds.
+GitHub Actions and F-Droid CI both build with JDK 21.
 
 Publishing steps are documented in
 [`docs/fdroid-publishing.md`](docs/fdroid-publishing.md).
