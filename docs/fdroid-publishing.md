@@ -7,38 +7,22 @@ Use these notes when submitting this app to the main F-Droid repository.
 - Make the GitHub repository public.
 - Keep `applicationId` as `io.github.smailzhu.ibeacontasker`.
 - Keep signing keys out of git. GitHub APKs are signed with private GitHub Actions secrets.
+- Keep the GitHub release asset name as `app-release.apk`; the F-Droid reproducible-build metadata downloads that file from each `v%v` release.
 - Confirm the app has a FOSS license file and only FOSS dependencies.
 - Confirm the release commit is tagged. For the first public release, use `v0.1.0`.
 - Confirm `fastlane/metadata/android/en-US/` has title, descriptions, changelog, graphics, and at least one phone screenshot.
 - Confirm phone screenshots are in `fastlane/metadata/android/en-US/images/phoneScreenshots/` and use sequential names such as `1.png`.
 - Confirm `fdroiddata/metadata/io.github.smailzhu.ibeacontasker.yml` points to the current version and tag.
 
-The initial `v0.1.0` F-Droid metadata is source-built and F-Droid-signed. If
-you install the GitHub release APK and later switch to the F-Droid APK, uninstall
-once because Android cannot update between different signing keys.
+The F-Droid metadata is configured for reproducible builds. F-Droid should
+publish the GitHub-signed APK only after verifying that its own source build
+matches it. If you install any build signed by a different key, uninstall once
+before switching back.
 
-## Reproducible Build Notes
+## Reproducible Builds
 
-Local verification proved the existing `v0.1.0` GitHub release APK is
-byte-for-byte reproducible after copying the GitHub release signature. The
-signature-copied APK had the same SHA-256 as the GitHub release APK:
-
-```text
-cad8d51ffa94789e2343a4503b9f54ab0ed6b30aa6ab1f0967b264d53163944a
-```
-
-GitLab CI still rejected that supplied binary because the APK signing block
-contains AGP dependency metadata:
-
-```text
-Problem: found extra signing block 'Dependency metadata'
-```
-
-For that reason, the first F-Droid submission does not use `Binaries` or
-`AllowedAPKSigningKeys`. F-Droid builds from source and signs `v0.1.0` with its
-own key.
-
-Future release APKs are configured with:
+Release APKs are configured to omit AGP dependency metadata from the APK signing
+block:
 
 ```groovy
 dependenciesInfo {
@@ -47,9 +31,18 @@ dependenciesInfo {
 }
 ```
 
-After a new tag is released with that setting, reproducible builds can be
-enabled by adding `Binaries` and `AllowedAPKSigningKeys` back to the fdroiddata
-metadata for the update.
+The metadata enables reproducible builds with:
+
+```yaml
+Binaries: https://github.com/smailzhu/ibeacon-tasker-plugin/releases/download/v%v/app-release.apk
+AllowedAPKSigningKeys: dfe6afb981260242785c1db452ce5e9bab5d1408de8987fa9c39cc78ef5d9faf
+```
+
+GitHub release builds use JDK 17. The fdroiddata recipe installs and selects
+OpenJDK 17 from Debian bookworm, and writes `org.gradle.java.home` during the
+build, so F-Droid's reproducible-build comparison uses the same Java toolchain
+as the published GitHub release. Keep GitHub release builds on JDK 17 unless you
+are making a new release and validating reproducibility again.
 
 ## Metadata Merge Request Path
 

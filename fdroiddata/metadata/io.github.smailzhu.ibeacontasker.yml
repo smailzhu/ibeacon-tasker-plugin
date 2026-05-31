@@ -16,14 +16,25 @@ AutoName: iBeacon Tasker
 
 RepoType: git
 Repo: https://github.com/smailzhu/ibeacon-tasker-plugin.git
+Binaries:
+  https://github.com/smailzhu/ibeacon-tasker-plugin/releases/download/v%v/app-release.apk
 
 Builds:
   - versionName: 0.1.0
     versionCode: 1
     commit: v0.1.0
     subdir: app
+    sudo:
+      - echo "deb http://deb.debian.org/debian bookworm main" > /etc/apt/sources.list.d/bookworm.list
+      - apt-get update
+      - apt-get install -y -t bookworm openjdk-17-jdk-headless
+      - update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java
+      - update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac
     gradle:
       - yes
+    prebuild: echo org.gradle.java.home=/usr/lib/jvm/java-17-openjdk-amd64 >> ../gradle.properties
+
+AllowedAPKSigningKeys: dfe6afb981260242785c1db452ce5e9bab5d1408de8987fa9c39cc78ef5d9faf
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
