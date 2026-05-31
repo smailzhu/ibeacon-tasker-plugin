@@ -16,6 +16,7 @@ AutoName: iBeacon Tasker
 
 RepoType: git
 Repo: https://github.com/smailzhu/ibeacon-tasker-plugin.git
+Binaries: https://github.com/smailzhu/ibeacon-tasker-plugin/releases/download/v%v/app-release.apk
 
 Builds:
   - versionName: 0.1.0
@@ -24,6 +25,8 @@ Builds:
     subdir: app
     gradle:
       - yes
+
+AllowedAPKSigningKeys: dfe6afb981260242785c1db452ce5e9bab5d1408de8987fa9c39cc78ef5d9faf
 
 AutoUpdateMode: Version v%v
 UpdateCheckMode: Tags

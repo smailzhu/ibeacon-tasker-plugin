@@ -71,9 +71,9 @@ Returned variables:
   this app is not restricted.
 - Tasker may return from a scan before the configured duration. The duration is
   a maximum wait time, not a fixed delay.
-- GitHub APKs and F-Droid APKs use the same package id, but Android cannot
-  update between them if they are signed by different keys. Uninstall once when
-  switching sources.
+- The F-Droid submission is configured for reproducible builds so accepted
+  F-Droid APKs should use the same signing key as GitHub releases. If you use a
+  build signed by a different key, uninstall once before switching sources.
 - If you installed a pre-public APK, uninstall it once before installing current
   public builds because the package name or signing key may have changed.
 
@@ -111,9 +111,10 @@ To install an update from a downloaded release APK:
 adb install -r app-release.apk
 ```
 
-GitHub and F-Droid builds use the same package id. If they are signed by
-different keys, Android cannot update one over the other. Uninstall once when
-switching between GitHub APKs and F-Droid builds.
+The F-Droid submission is configured for reproducible builds so accepted F-Droid
+APKs should use the same signing key as GitHub releases. Android cannot update
+between APKs signed by different keys, so uninstall once if you use an APK from
+another signing source.
 
 Do not change `applicationId` after creating Tasker profiles. Tasker identifies plug-ins partly by package and edit activity class.
 
@@ -142,6 +143,9 @@ git ls-remote --tags origin v0.1.0
 The app uses package id `io.github.smailzhu.ibeacontasker`, license
 `Apache-2.0`, no Internet permission, and default source version `0.1.0` with
 `versionCode` `1`.
+
+The F-Droid metadata enables reproducible builds by verifying the GitHub release
+APK against F-Droid's source build and pinning the release signing certificate.
 
 Publishing steps are documented in
 [`docs/fdroid-publishing.md`](docs/fdroid-publishing.md).
