@@ -3,17 +3,16 @@
 AntiFeatures:
   NonFreeDep:
     en-US: Tasker integration requires Tasker or another compatible Locale plug-in host; the built-in scanner can run without Tasker.
-
 Categories:
   - Connectivity
   - System
-
 License: Apache-2.0
 AuthorName: smailzhu
-
 SourceCode: https://github.com/smailzhu/ibeacon-tasker-plugin
 IssueTracker: https://github.com/smailzhu/ibeacon-tasker-plugin/issues
 Changelog: https://github.com/smailzhu/ibeacon-tasker-plugin/releases
+
+AutoName: iBeacon Tasker
 
 RepoType: git
 Repo: https://github.com/smailzhu/ibeacon-tasker-plugin.git
@@ -22,10 +21,13 @@ Builds:
   - versionName: 0.1.0
     versionCode: 1
     commit: v0.1.0
+    subdir: app
     gradle:
       - yes
 
 AutoUpdateMode: Version v%v
 UpdateCheckMode: Tags
+UpdateCheckData: 'app/build.gradle|appVersionCode"\) \?: "(\d+)"|app/build.gradle|appVersionName"\)
+  \?: "([^"]+)"'
 CurrentVersion: 0.1.0
 CurrentVersionCode: 1

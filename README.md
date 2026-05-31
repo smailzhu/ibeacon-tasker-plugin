@@ -146,6 +146,13 @@ The app uses package id `io.github.smailzhu.ibeacontasker`, license
 Publishing steps are documented in
 [`docs/fdroid-publishing.md`](docs/fdroid-publishing.md).
 
+## Issues And Contact
+
+Report bugs and support questions through
+[GitHub Issues](https://github.com/smailzhu/ibeacon-tasker-plugin/issues).
+For security vulnerabilities, follow the private reporting guidance in
+[`SECURITY.md`](SECURITY.md).
+
 ## License
 
 Apache-2.0. See [LICENSE](LICENSE).

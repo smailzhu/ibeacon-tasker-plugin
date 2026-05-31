@@ -6,7 +6,7 @@ and easy to review.
 ## Development Setup
 
 - Use JDK 17.
-- Install Android SDK platform 35.
+- Install Android SDK platform 36.
 - Keep `applicationId` as `io.github.smailzhu.ibeacontasker`.
 
 Build locally with:
@@ -46,4 +46,3 @@ Build locally with:
 - Phone screenshots belong under
   `fastlane/metadata/android/en-US/images/phoneScreenshots/` with sequential
   names such as `1.png`.
-
