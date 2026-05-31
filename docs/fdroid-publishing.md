@@ -39,6 +39,12 @@ cad8d51ffa94789e2343a4503b9f54ab0ed6b30aa6ab1f0967b264d53163944a
 Future releases must keep using the same signing key and the `app-release.apk`
 asset name, or the F-Droid metadata must be updated before release.
 
+The first release APK was built with JDK 17. The fdroiddata recipe installs and
+selects OpenJDK 17, and writes `org.gradle.java.home` during the build, so
+F-Droid's reproducible-build comparison uses the same Java toolchain as the
+published GitHub release. Keep GitHub release builds on JDK 17 unless you are
+making a new release and validating reproducibility again.
+
 ## Metadata Merge Request Path
 
 This repo already includes a copy-ready metadata file:

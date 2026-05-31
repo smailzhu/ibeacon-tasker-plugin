@@ -146,6 +146,7 @@ The app uses package id `io.github.smailzhu.ibeacontasker`, license
 
 The F-Droid metadata enables reproducible builds by verifying the GitHub release
 APK against F-Droid's source build and pinning the release signing certificate.
+Its build recipe also pins JDK 17 to match the published GitHub release APK.
 
 Publishing steps are documented in
 [`docs/fdroid-publishing.md`](docs/fdroid-publishing.md).

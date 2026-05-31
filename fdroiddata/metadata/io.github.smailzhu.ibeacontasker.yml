@@ -23,6 +23,12 @@ Builds:
     versionCode: 1
     commit: v0.1.0
     subdir: app
+    sudo:
+      - apt-get update
+      - apt-get install -y openjdk-17-jdk-headless
+      - update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java
+      - update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac
+    prebuild: echo org.gradle.java.home=/usr/lib/jvm/java-17-openjdk-amd64 >> ../gradle.properties
     gradle:
       - yes
 
