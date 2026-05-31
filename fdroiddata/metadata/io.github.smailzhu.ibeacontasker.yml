@@ -28,7 +28,7 @@ Builds:
 
 AllowedAPKSigningKeys: dfe6afb981260242785c1db452ce5e9bab5d1408de8987fa9c39cc78ef5d9faf
 
-AutoUpdateMode: Version v%v
+AutoUpdateMode: Version
 UpdateCheckMode: Tags
 UpdateCheckData: 'app/build.gradle|appVersionCode"\) \?: "(\d+)"|app/build.gradle|appVersionName"\)
   \?: "([^"]+)"'
